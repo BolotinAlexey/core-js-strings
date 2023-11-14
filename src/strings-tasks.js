@@ -234,7 +234,6 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  console.log(minutes + seconds.toString().padStart(3, ':'));
   return (
     minutes.toString().padStart(2, '0') + seconds.toString().padStart(3, ':0')
   );
@@ -250,8 +249,8 @@ function formatTime(minutes, seconds) {
  *   reverseString('abcdef') => 'fedcba'
  *   reverseString('12345') => '54321'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 /**
@@ -265,8 +264,11 @@ function reverseString(/* str */) {
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+function orderAlphabetically(str) {
+  return str
+    .split('')
+    .sort((a, b) => a.localeCompare(b))
+    .join('');
 }
 
 /**
@@ -281,8 +283,8 @@ function orderAlphabetically(/* str */) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  return str.includes(substring);
 }
 
 /**
@@ -299,8 +301,9 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y'];
+  return str.split('').reduce((a, b) => a + vowels.includes(b), 0);
 }
 
 /**
@@ -316,8 +319,19 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const noSpace = str
+    .replaceAll(' ', '')
+    .replaceAll('!', '')
+    .replaceAll('?', '')
+    .replaceAll(',', '');
+  const left = noSpace.slice(0, Math.ceil(noSpace.length / 2));
+  const right = noSpace
+    .slice(Math.floor(noSpace.length / 2))
+    .split('')
+    .reverse()
+    .join('');
+  return left.toLowerCase() === right.toLowerCase();
 }
 
 /**
@@ -332,8 +346,8 @@ function isPalindrome(/* str */) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  return sentence.split(' ').reduce((a, b) => (b.length > a.length ? b : a));
 }
 
 /**
@@ -346,8 +360,11 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  return str
+    .split(' ')
+    .map((word) => word.split('').reverse().join(''))
+    .join(' ');
 }
 
 /**
@@ -361,8 +378,14 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  const invertChar = (char) => {
+    const code = char.charCodeAt(0);
+    if (code > 64 && code < 91) return char.toLowerCase();
+    if (code > 96 && code < 123) return char.toUpperCase();
+    return char;
+  };
+  return str.split('').map(invertChar).join('');
 }
 
 /**
